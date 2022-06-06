@@ -1,0 +1,377 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Exchange{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 70%;
+  font-weight: 600;
+  font-size: 18px;
+}
+.exchange-layout{
+  box-sizing: border-box;
+  text-align: left;
+  border: 5px solid #182533;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  max-width: 300px;
+}
+.Currency-in-list{
+  box-sizing: border-box;
+  list-style: none;
+  padding: 2px;
+}
+.in-list-element{
+  background-color: #182533;
+  box-sizing: border-box;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  padding: 1%;
+  padding-left: 10px;
+  margin: 5px;
+  border: 3px solid transparent;
+  text-shadow: 1px  1px 4px #2b5278;
+  position: relative;
+}
+.in-list-element-active{
+  background-color: #2b5278;
+  text-shadow: 2px 2px 4px #0e1621;
+}
+
+.Currency-out-list{
+  box-sizing: border-box;
+  list-style: none;
+  padding: 2px;
+}
+.out-list-element{
+  background-color: #182533;
+  box-sizing: border-box;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  padding: 1%;
+  padding-left: 10px;
+  margin: 5px;
+  border: 3px solid transparent;
+  text-shadow: 1px 1px 4px #2b5278;
+  position: relative;
+}
+.out-list-element-active{
+  background-color: #2b5278;
+  text-shadow: 1px 1px 4px #0e1621;
+}
+
+.exchange-input{
+  outline: none;
+  box-sizing: border-box;
+  font-size: 20px;
+  line-height: 27px;
+  border-radius: 8px;
+  padding: 10.5px 20px;
+  margin: 0px 10%;
+  border: 1px solid transparent;
+  color: #2F3E4C;
+  height: 50px;
+  width: 80%;
+  background: #EFF5FB;
+}
+.exchange-secondary-inputs{
+    margin: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+.exchange-calc{
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.exchange-calc>div{
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.exchange-calc>div>p{
+  margin: 0px;
+}
+.exchange-inputs{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  position: relative;
+}
+
+.exchange-inputs>span{
+  position: absolute;
+  top: 30%;
+  right: 20%;
+}
+.exchange-input-secondary{
+  outline: none;
+  box-sizing: border-box;
+  font-size: 20px;
+  line-height: 27px;
+  border-radius: 8px;
+  padding: 10.5px 26px;
+  margin: 2px 0px;
+  border: 1px solid transparent;
+  color: #2F3E4C;
+  height: 50px;
+  width: 80%;
+  background: #EFF5FB;
+}
+.exhange-calc-input-email{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  position: relative;
+}
+.exhange-calc-input-wallets{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  position: relative;
+}
+.exchange-input-requisit{
+  margin: 20px 0 10px;
+  background-color: #FFFFFF;
+  border: 1px solid #2b5278;
+  font-size: 14px;
+  background: transparent;
+  color: #ffffff;
+}
+.exchange-input-requisit-label{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  color: #7f91a4;
+  top: 45%;
+  right: 27%;
+}
+.exchange-submit{
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.exchange-submit-text{
+  color: grey;
+  font-size: 10px;
+}
+.exchange-submit-text>a{
+  font-size: 10px;
+  text-decoration-style: solid;
+}
+.exchange-input-submit{
+  outline: none;
+  box-sizing: border-box;
+  font-size: 20px;
+  line-height: 27px;
+  border-radius: 8px;
+  padding: 10.5px 26px;
+  border: 1px solid transparent;
+  color: #ffffff;
+  height: 50px;
+  width: 80%;
+  background: #2b5278;
+  cursor: pointer;
+}
+.pay-wallet-label{
+  display: none;
+  box-sizing: border-box;
+  color: red;
+  padding: 5px;
+  position: absolute;
+  top: 0;
+  font-size: 12px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+@media (max-width: 1366px){
+  .Exchange {
+      align-items: center;
+      justify-content: center;
+  }
+  .exchange-calc{
+    max-width: 100%;
+  }
+  .exchange-input-secondary{
+    width: 85%;
+  }
+  .exchange-input-requisit{
+    width: 85%;
+  }
+  .exhange-calc-input-email, .exhange-calc-input-wallets{
+    justify-content: flex-start;
+    max-width: 95%;
+  }
+  .exchange-calc>div{
+    display: flex;
+    flex-direction: row;
+  }
+  .exchange-secondary-inputs{
+    margin: 0px 0px 0px 7%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .exchange-submit{
+    flex-direction: column;
+    max-width: 50%;
+  }
+
+}
+
+@media (max-width: 900px){
+  .Exchange{
+    flex-direction: column;
+  }
+  .exchange-calc{
+    max-width: 300px;
+  }
+  .exchange-calc>div{
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .exchange-input-secondary, .exchange-input-requisit{
+    width: 85%;
+  }
+  .exhange-calc-input-email, .exhange-calc-input-wallets{
+    justify-content: center;
+    max-width: 100%;
+  }
+  .exchange-secondary-inputs{
+    margin: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .exchange-submit{
+    max-width: 100%;
+    align-items: center;
+  }
+}
+
+
+.currencyIconLTC{
+  box-sizing: border-box;
+  display: block;
+  background: url(../public/LTC.png) no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20%;
+  right: 10%;
+}
+.currencyIconXTZ{
+  box-sizing: border-box;
+  display: block;
+  background: url(../public/XTZ.svg) no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20%;
+  right: 10%;
+}
+.currencyIconBTC{
+  box-sizing: border-box;
+  display: block;
+  background: url(../public/BTC.png) no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20%;
+  right: 10%;
+}
+.currencyIconZEC{
+  box-sizing: border-box;
+  display: block;
+  background: url(../public/ZEC.svg) no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20%;
+  right: 10%;
+}
+.currencyIconXRP{
+  box-sizing: border-box;
+  display: block;
+  background: url(../public/XRP.png) no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20%;
+  right: 10%;
+}
+.currencyIconXLM{
+  box-sizing: border-box;
+  display: block;
+  background: url(../public/XLM.svg) no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20%;
+  right: 10%;
+}
+.currencyIconTRX{
+  box-sizing: border-box;
+  display: block;
+  background: url(../public/TRX.svg) no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20%;
+  right: 10%;
+}
+.currencyIconETH{
+  box-sizing: border-box;
+  display: block;
+  background: url(../public/ETH.png) no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20%;
+  right: 10%;
+}
+
+.disabled{
+  pointer-events: none;
+  background-color: #0d0f12;
+  cursor: unset;
+}
+
+.submit-text-button{
+  cursor: pointer;
+  text-decoration: underline solid;
+  background-color: transparent;
+  color: grey;
+  font-size: 10px;
+  border: none;
+}
