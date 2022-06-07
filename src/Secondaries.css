@@ -266,7 +266,9 @@ ul,p{
   margin-top: auto;
   padding-bottom: 20px;
 }
-
+#inSumm{
+  display: none;
+}
 
 @media (max-width: 900px){
   .Footer{

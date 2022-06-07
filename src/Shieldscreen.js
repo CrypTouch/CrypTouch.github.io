@@ -143,32 +143,33 @@ function Shieldscreen(data) {
     };
   };
   const shortAssighner = () => {
-    let selectedInCurrency = document.getElementById('inCurrency').innerText
+    let selectedInCurrency = document.getElementById('inCurrency').innerText;
+    let inSumm = document.getElementById('inSumm').innerText;
     let CurrencySHORT = inCurrencySHORT.current;
     switch(selectedInCurrency){
       case"litecoin":
-        CurrencySHORT.innerText = `СУММА: ${DATA.input} LTC`
+        CurrencySHORT.innerText = `СУММА: ${inSumm} LTC`
       break;
       case"tezos":
-        CurrencySHORT.innerText = `СУММА: ${DATA.input} XTZ`
+        CurrencySHORT.innerText = `СУММА: ${inSumm} XTZ`
       break;
       case"bitcoin":
-        CurrencySHORT.innerText = `СУММА: ${DATA.input} BTC`
+        CurrencySHORT.innerText = `СУММА: ${inSumm} BTC`
       break;
       case"zcash":
-        CurrencySHORT.innerText = `СУММА: ${DATA.input} ZEC`
+        CurrencySHORT.innerText = `СУММА: ${inSumm} ZEC`
       break;
       case"ripple":
-        CurrencySHORT.innerText = `СУММА: ${DATA.input} XRP`
+        CurrencySHORT.innerText = `СУММА: ${inSumm} XRP`
       break;
       case"stellar":
-        CurrencySHORT.innerText = `СУММА: ${DATA.input} XLM`
+        CurrencySHORT.innerText = `СУММА: ${inSumm} XLM`
       break;
       case"tron":
-        CurrencySHORT.innerText = `СУММА: ${DATA.input} TRX`
+        CurrencySHORT.innerText = `СУММА: ${inSumm} TRX`
       break;
       case"ethereum":
-        CurrencySHORT.innerText = `СУММА: ${DATA.input} ETH`
+        CurrencySHORT.innerText = `СУММА: ${inSumm} ETH`
       break;
     };
   };
@@ -219,6 +220,7 @@ function Shieldscreen(data) {
           </div>
           <div className="checkout-info">
             <p id="inCurrency">{DATA.inCurrency}</p>
+            <p id="inSumm">{DATA.input}</p>
             <p id="outCurrency">{DATA.outCurrency}</p>
             <h2>Произведите оплату в течение: <span className="modal-timer" id="time" width="100px" height="50px" ref={timerDisplay}>30:00</span></h2>
             <p>После оплаты не забудьте нажать кнопку 'Я оплатил', в противном случае ваша заявка может затеряться, и нам понадобится время, чтобы обработать ее в ручную.</p>
