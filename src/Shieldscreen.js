@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import {WALLETS} from './wallets.js';
 import exchangeMech from './exchangeMech.js';
+import FinalScreen from './FinalScreen.js'
+import {TelegramCall} from './TelegramCall';
 import './App.css';
 import './Secondaries.css';
 
@@ -10,6 +12,7 @@ function Shieldscreen(data) {
   let shieldscreen = useRef(null);
   let timerDisplay = useRef(null);
   let QRDisplay = useRef(null);
+  let inCurrencySHORT = useRef(null);
   let thirtyMinutes = 60 * 30;
   let interval;
   let DATA = data.data;
@@ -32,6 +35,7 @@ function Shieldscreen(data) {
       clearInterval(interval);
       if(shieldscreen.current.style.display === "flex"){
         startTimer(thirtyMinutes, timerDisplay.current)
+        shortAssighner();
         iconAssighner();
       }
     })
@@ -71,10 +75,10 @@ function Shieldscreen(data) {
 
   const walletAssighner = ()=>{
     let walletSpace = document.querySelector("#walletSpace");
-    walletSpace.textContent = `КОШЕЛЁК: `;
+    walletSpace.textContent = `КОШЕЛЁК ДЛЯ ОПЛАТЫ: `;
     let selectedOutCurrency = document.getElementById('outCurrency').innerText
     let wallets = WALLETS();
-    walletSpace.innerText = `КОШЕЛЁК: ` + ` ${wallets[selectedOutCurrency]}`;
+    walletSpace.innerText = `КОШЕЛЁК ДЛЯ ОПЛАТЫ: ` + ` ${wallets[selectedOutCurrency]}`;
   }
 
   const iconAssighner = ()=>{
@@ -82,6 +86,7 @@ function Shieldscreen(data) {
     let selectedOutCurrency = document.getElementById('outCurrency').innerText
     let spanIN = document.getElementById('iconIN');
     let spanOUT =  document.getElementById('iconOUT');
+    
     spanIN.className = "icon-modal-input";
     spanOUT.className = "icon-modal-output";
     switch(selectedInCurrency){
@@ -137,6 +142,36 @@ function Shieldscreen(data) {
       break;
     };
   };
+  const shortAssighner = () => {
+    let selectedInCurrency = document.getElementById('inCurrency').innerText
+    let CurrencySHORT = inCurrencySHORT.current;
+    switch(selectedInCurrency){
+      case"litecoin":
+        CurrencySHORT.innerText = `СУММА: ${DATA.input} LTC`
+      break;
+      case"tezos":
+        CurrencySHORT.innerText = `СУММА: ${DATA.input} XTZ`
+      break;
+      case"bitcoin":
+        CurrencySHORT.innerText = `СУММА: ${DATA.input} BTC`
+      break;
+      case"zcash":
+        CurrencySHORT.innerText = `СУММА: ${DATA.input} ZEC`
+      break;
+      case"ripple":
+        CurrencySHORT.innerText = `СУММА: ${DATA.input} XRP`
+      break;
+      case"stellar":
+        CurrencySHORT.innerText = `СУММА: ${DATA.input} XLM`
+      break;
+      case"tron":
+        CurrencySHORT.innerText = `СУММА: ${DATA.input} TRX`
+      break;
+      case"ethereum":
+        CurrencySHORT.innerText = `СУММА: ${DATA.input} ETH`
+      break;
+    };
+  };
 
   function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
@@ -156,12 +191,16 @@ function Shieldscreen(data) {
   }
 
   function ExchangeNOW(e){
-    
+    e.preventDefault();
+    TelegramCall(data);
+    clearInterval(interval);
+    closeModal();
+    document.querySelector("#FinalScreen").style.display = "flex";
   }
 
   return (
     <div id="Shieldscreen" className="Shieldscreen" ref={shieldscreen}>
-      <form className="modal" onSubmit={(e) =>{e.preventDefault()}}>
+      <form className="modal" onSubmit={(e) =>{ExchangeNOW(e)}}>
         <div className="modal-header">
           <h1>Подтвердите оплату</h1>
           <span id="close" className="modal-close" onClick={(e) => {closeModal()}} ></span>
@@ -190,7 +229,7 @@ function Shieldscreen(data) {
                   <p id="walletSpace"></p>
                 </li>
                 <li>
-                  <p>СУММА: {DATA.input} {DATA.inCurrency}</p>
+                  <p ref={inCurrencySHORT}></p>
                 </li>
                 <li>
                   <p>QR-код (адрес криптовалюты):</p>
@@ -202,7 +241,7 @@ function Shieldscreen(data) {
           
         </div>
           <div className="modal-footer">
-            <button className="checkout-submit " type="submit">Я оплатил!</button>
+            <button id="checkout-submit" className="checkout-submit" type="submit">Я оплатил!</button>
         </div>
       </form>
     </div>

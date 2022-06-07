@@ -68,6 +68,9 @@ ul,p{
   max-width: 70%;
   max-height: 95%;
 }
+.final-screen{
+  background-color: #f56b00;
+}
 .modal-header>h1{
   margin-top: 10px;
 }
@@ -83,6 +86,14 @@ ul,p{
   background:
   linear-gradient(45deg, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 43%,#fff 45%,#fff 55%,rgba(0,0,0,0) 57%,rgba(0,0,0,0) 100%),
   linear-gradient(135deg, #f56b00 0%,#f56b00 43%,#fff 45%,#fff 55%,#f56b00 57%,#f56b00 100%);
+}
+.final-close{
+  width: 10px;
+  height: 10px;
+  border: 4px solid #2b5278;
+  background:
+  linear-gradient(45deg, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 43%,#fff 45%,#fff 55%,rgba(0,0,0,0) 57%,rgba(0,0,0,0) 100%),
+  linear-gradient(135deg, #2b5278 0%,#2b5278 43%,#fff 45%,#fff 55%,#2b5278 57%,#2b5278 100%);
 }
 .modal-body{
   display: flex;
@@ -267,6 +278,9 @@ ul,p{
     max-width: 100%;
     max-height: 100%;
     overflow: scroll;
+  }
+  .final-screen{
+    overflow: unset;
   }
   .modal-body{
     min-width: 98%;
