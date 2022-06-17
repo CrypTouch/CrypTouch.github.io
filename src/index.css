@@ -25,23 +25,32 @@ input::-webkit-inner-spin-button {
 }
 
 ::-webkit-scrollbar {
+  box-sizing: border-box;
   position: fixed;
   width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
+  box-sizing: border-box;
   background: transparent;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
+  box-sizing: border-box;
   background: #2b5278;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
+  box-sizing: border-box;
   background: #555;
+}
+
+::-webkit-scrollbar-corner{
+  box-sizing: border-box;
+  display: none;
 }

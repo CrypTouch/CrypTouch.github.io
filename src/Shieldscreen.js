@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import {WALLETS} from './wallets.js';
 import exchangeMech from './exchangeMech.js';
 import FinalScreen from './FinalScreen.js'
+import axios from 'axios';
 import {TelegramCall} from './TelegramCall';
 import './App.css';
 import './Secondaries.css';
@@ -76,9 +76,9 @@ function Shieldscreen(data) {
   const walletAssighner = ()=>{
     let walletSpace = document.querySelector("#walletSpace");
     walletSpace.textContent = `КОШЕЛЁК ДЛЯ ОПЛАТЫ: `;
-    let selectedOutCurrency = document.getElementById('outCurrency').innerText
+    let selectedInCurrency = document.getElementById('inCurrency').innerText
     let wallets = WALLETS();
-    walletSpace.innerText = `КОШЕЛЁК ДЛЯ ОПЛАТЫ: ` + ` ${wallets[selectedOutCurrency]}`;
+    walletSpace.innerText = `КОШЕЛЁК ДЛЯ ОПЛАТЫ: ` + ` ${wallets[selectedInCurrency]}`;
   }
 
   const iconAssighner = ()=>{
@@ -210,12 +210,12 @@ function Shieldscreen(data) {
           <div className="modal-inputs">
             <div>
               <input disabled='disabled' value={DATA.input} type="number" step="any" name="modal-calc-in" id="modal-input" className="modal-input"></input>
-              <span id="iconIN" className="icon-modal-input"></span>
+              <span id="iconIN"></span>
             </div>
             <span className="arrowDown"></span>
             <div>
               <input disabled='disabled' value={DATA.output} type="number" step="any" name="modal-calc-out" id="modal-output" className="modal-input"></input>
-              <span id="iconOUT" className="icon-modal-output"></span>
+              <span id="iconOUT"></span>
             </div>
           </div>
           <div className="checkout-info">

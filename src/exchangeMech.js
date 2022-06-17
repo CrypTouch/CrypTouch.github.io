@@ -7,6 +7,7 @@ import axios from 'axios';
 import './App.css';
 window.Buffer = window.Buffer || require("buffer").Buffer;
 var WAValidator = require('multicoin-address-validator');
+var luhn = require("luhn");
 
 const ExchangeMech = () => {
 
@@ -17,6 +18,7 @@ const ExchangeMech = () => {
   const [giveInput, setInput] = useState('1');
   const [getOutput, setOutput] = useState('1'); 
   const [userEmail, setUserEmail] = useState('');
+  const [userFIO, setUserFIO] = useState('');
   const [userWalletProvided, setUserWalletProvided] = useState('');
 
   let payWalletField = document.getElementById("pay-wallet");
@@ -24,9 +26,6 @@ const ExchangeMech = () => {
 
   useEffect(() => {
       axios.all([
-        axios.get(`https://api.coingecko.com/api/v3/coins/${selectedInCurrency}`), 
-        axios.get(`https://api.coingecko.com/api/v3/coins/${selectedOutCurrency}`),
-
         axios.get(`https://api.coingecko.com/api/v3/coins/litecoin`),
         axios.get(`https://api.coingecko.com/api/v3/coins/tezos`),
         axios.get(`https://api.coingecko.com/api/v3/coins/bitcoin`),
@@ -36,7 +35,7 @@ const ExchangeMech = () => {
         axios.get(`https://api.coingecko.com/api/v3/coins/tron`),
         axios.get(`https://api.coingecko.com/api/v3/coins/ethereum`),
       ])
-      .then(axios.spread((data1, data2, dataLTC, dataTZC, dataBTC, dataZEC, dataXRP, dataXLM, dataTRX, dataETH) => {
+      .then(axios.spread((dataLTC, dataTZC, dataBTC, dataZEC, dataXRP, dataXLM, dataTRX, dataETH) => {
         setPOST([dataLTC.data, dataTZC.data, dataBTC.data, dataZEC.data, dataXRP.data, dataXLM.data, dataTRX.data, dataETH.data]);
       }))
   },[selectedInCurrency,selectedOutCurrency]);
@@ -44,8 +43,9 @@ const ExchangeMech = () => {
 
 
   const ULTIMATEHANDLER = (event)=>{
-      payWalletField.style.border = "1px solid #2b5278";
+      payWalletLabel.style.top = "0";
       payWalletLabel.style.display = "none";
+      payWalletField.style.border = "1px solid #2b5278";
 
     if (event.target.id === "submit-text-button") {
         document.getElementById("Rules").style.display = "flex";
@@ -100,31 +100,72 @@ const ExchangeMech = () => {
     };
 
     if(!eventTarget.classList.contains("out-list-element-active") && eventTarget.classList.contains("out-list-element") && !eventTarget.classList.contains("disabled")) {
+      payWalletField.type = "text";
       outCurrencyList.forEach((el)=>{
         el.classList.remove("out-list-element-active")
         el.classList.remove("disabled")
+        if(document.querySelector("#fullNameField")){
+          document.querySelector("#fullNameField").remove();
+        }
       })
       eventTarget.classList.add("out-list-element-active")
       selectCurrencyOut(eventTarget.id.replace("-out",""))
     };
   };
 
-  const formDATA = (input,output,inCurrency,outCurrency,email,wallet) =>{
-    return {input,output,inCurrency,outCurrency,email,wallet}
+  const formDATA = (input,output,inCurrency,outCurrency,email,userFIO,wallet) =>{
+    return {input,output,inCurrency,outCurrency,email,userFIO,wallet}
   }
 
   const handleSubmit = (e) => {  
     e.preventDefault(); 
-    let valid = WAValidator.validate(payWalletField.value, selectedOutCurrency);
-    let shieldscreen = document.getElementById('Shieldscreen');
-    if (valid) {
-      if (giveInput != 1 || getOutput != 1) {
-      shieldscreen.style.display = "flex";
-      ;
-    }
+    payWalletLabel.style.top = "0";
+    payWalletLabel.style.display = "none";
+    payWalletField.style.border = "1px solid #2b5278";
+    if (selectedOutCurrency === "usd") {
+      let validCard = luhn.validate(userWalletProvided.replace(/[^0-9]/g, ''));
+      if(validCard){
+        let shieldscreen = document.getElementById('Shieldscreen');
+        setUserFIO(document.querySelector("#fullNameField").value)
+        shieldscreen.style.display = "flex";
+      }else{
+        payWalletField.style.border = "1px solid red";
+        payWalletLabel.style.display = "block";
+        payWalletLabel.style.top = "48%";
+        payWalletLabel.textContent = "Ввдите верный номер карты!"
+      }
     }else{
-      payWalletField.style.border = "1px solid red";
-      payWalletLabel.style.display = "block";
+      let valid = WAValidator.validate(payWalletField.value, selectedOutCurrency);
+      let shieldscreen = document.getElementById('Shieldscreen');
+      if (valid) {
+        if (selectedInCurrency === selectedOutCurrency) {
+          payWalletField.style.border = "1px solid red";
+          payWalletLabel.style.display = "block";
+          payWalletLabel.textContent = `Вы не можте обмнять ${selectedInCurrency} на ${selectedOutCurrency}!`
+        }else{
+          shieldscreen.style.display = "flex";
+        }
+      }else{
+        payWalletField.style.border = "1px solid red";
+        payWalletLabel.style.display = "block";
+        payWalletLabel.textContent = "Введите верный адрес кошелька!"
+      }
+    }
+
+  };
+
+  const usdOnclick = (e) => {
+    payWalletField.placeholder = "Номер вашей USD карты";
+    payWalletField.type = "number"
+    if(!document.querySelector("#fullNameField")){
+      let parrent = document.querySelector(".exhange-calc-input-wallets")
+      let fullNameField = document.createElement('input');
+      parrent.style.flexDirection = "column"
+      fullNameField.classList = "exchange-input exchange-input-requisit";
+      fullNameField.id = "fullNameField";
+      fullNameField.placeholder = "ФИО владельца карты";
+      fullNameField.required = "true";
+      parrent.insertBefore(fullNameField, payWalletField)
     }
   };
 
@@ -185,6 +226,10 @@ const ExchangeMech = () => {
             </div>
           </div>
           <ul className="Currency-out-list" onClick={(e) =>{ULTIMATEHANDLER(e)}}>
+            {/* <li id="usd-out" className="out-list-element" onClick={(e) => {usdOnclick(e)}}> */}
+            {/*   <span className="currencyIconUSD"></span> */}
+            {/*   <span>USD</span> */}
+            {/* </li> */}
             <li id="litecoin-out" className="out-list-element out-list-element-active">
               <span className="currencyIconLTC"></span>
               <span>Litecoin</span>
@@ -259,7 +304,7 @@ const ExchangeMech = () => {
         
       </form>
     <Rules/>
-    <Shieldscreen data={formDATA(giveInput,getOutput,selectedInCurrency,selectedOutCurrency,userEmail,userWalletProvided)} />
+    <Shieldscreen data={formDATA(giveInput,getOutput,selectedInCurrency,selectedOutCurrency,userEmail,userFIO,userWalletProvided)} />
   </span>
   );
     

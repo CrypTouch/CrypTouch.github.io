@@ -13,6 +13,7 @@
     "http-browserify": "^1.7.0",
     "https-browserify": "^1.0.0",
     "isomorphic-fetch": "^3.0.0",
+    "luhn": "^2.4.1",
     "multicoin-address-validator": "^0.5.10",
     "next": "^12.1.6",
     "querystring": "^0.2.1",

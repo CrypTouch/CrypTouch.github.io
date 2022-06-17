@@ -25,7 +25,11 @@
 .Currency-in-list{
   box-sizing: border-box;
   list-style: none;
-  padding: 2px;
+  
+  margin: 4px;
+  max-height: 330px;
+  overflow-y: scroll;
+  padding: 1px;
 }
 .in-list-element{
   background-color: #182533;
@@ -48,7 +52,10 @@
 .Currency-out-list{
   box-sizing: border-box;
   list-style: none;
-  padding: 2px;
+  padding: 1px;
+  margin: 4px;
+  max-height: 330px;
+  overflow-y: scroll;
 }
 .out-list-element{
   background-color: #182533;
@@ -94,6 +101,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-height: 430px;
 }
 .exchange-calc>div{
   width: 100%;
@@ -145,7 +153,7 @@
   position: relative;
 }
 .exchange-input-requisit{
-  margin: 20px 0 10px;
+  margin: 10px 0 10px;
   background-color: #FFFFFF;
   border: 1px solid #2b5278;
   font-size: 14px;
@@ -217,9 +225,13 @@
   .exchange-input-requisit{
     width: 85%;
   }
-  .exhange-calc-input-email, .exhange-calc-input-wallets{
+  .exhange-calc-input-email{
     justify-content: flex-start;
     max-width: 95%;
+  }
+  .exhange-calc-input-wallets{
+    justify-content: flex-start;
+    align-items: flex-start;
   }
   .exchange-calc>div{
     display: flex;
@@ -254,9 +266,13 @@
   .exchange-input-secondary, .exchange-input-requisit{
     width: 85%;
   }
-  .exhange-calc-input-email, .exhange-calc-input-wallets{
+  .exhange-calc-input-email{
     justify-content: center;
     max-width: 100%;
+  }
+  .exhange-calc-input-wallets{
+      justify-content: center;
+    align-items: center;
   }
   .exchange-secondary-inputs{
     margin: 0px;
@@ -271,7 +287,17 @@
   }
 }
 
-
+.currencyIconUSD{
+  box-sizing: border-box;
+  display: block;
+  background: url(../public/USD.png) no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20%;
+  right: 10%;
+}
 .currencyIconLTC{
   box-sizing: border-box;
   display: block;
