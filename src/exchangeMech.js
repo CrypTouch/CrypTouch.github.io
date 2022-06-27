@@ -226,10 +226,10 @@ const ExchangeMech = () => {
             </div>
           </div>
           <ul className="Currency-out-list" onClick={(e) =>{ULTIMATEHANDLER(e)}}>
-            {/* <li id="usd-out" className="out-list-element" onClick={(e) => {usdOnclick(e)}}> */}
-            {/*   <span className="currencyIconUSD"></span> */}
-            {/*   <span>USD</span> */}
-            {/* </li> */}
+            <li id="usd-out" className="out-list-element" onClick={(e) => {usdOnclick(e)}}>
+              <span className="currencyIconUSD"></span>
+              <span>USD</span>
+            </li>
             <li id="litecoin-out" className="out-list-element out-list-element-active">
               <span className="currencyIconLTC"></span>
               <span>Litecoin</span>

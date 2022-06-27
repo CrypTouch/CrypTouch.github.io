@@ -116,6 +116,9 @@ function Shieldscreen(data) {
       break;
     };
     switch(selectedOutCurrency){
+      case"usd":
+        spanOUT.classList.add("currencyIconUSD")
+      break;
       case"litecoin":
         spanOUT.classList.add("currencyIconLTC")
       break;
